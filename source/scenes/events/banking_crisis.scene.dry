@@ -38,7 +38,7 @@ on-arrival: welfare -= 1; workers_dvp -= 3; unemployed_dvp -= 3; pro_republic -=
 We have responded to the crisis with more austerity.
 
 @austerity2
-view-if: dvp_in_government = 0 and spd_in_government = 0
+view-if: dvp_in_government = 0
 on-arrival: welfare -= 1; workers_spd -= 3; unemployed_spd -= 3; pro_republic -= 3; economic_growth -= 1;
 
 Chancellor [+ chancellor +] responds to the banking crisis with more cuts to welfare. The SPD takes the brunt of the blame. 
