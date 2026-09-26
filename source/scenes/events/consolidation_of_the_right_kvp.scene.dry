@@ -1,6 +1,6 @@
 title: Consolidation of the Right
 subtitle: The right-wing parties are trying to unite.
-view-if: electoral_threshold > 0 and kvp_formed and (csvd_exist or wp_exist or cnblp_exist or vrp_exist) and wip
+view-if: electoral_threshold > 0 and kvp_ideology = "Moderate" and (csvd_exist or wp_exist or cnblp_exist or vrp_exist)
 new-page: true
 max-visits: 1
 tags: event
@@ -8,30 +8,28 @@ priority: 4
 
 = Consolidation of the Right
 
-The <span style="color: #455B95;">**KVP**</span> is trying to convince the smaller parties to unite.
+After we instituted the electoral threshold, the <span style="color: #3F7BC1;">**KVP**</span> and the <span style="color: #003755;">**DNVP**</span> is trying to convince the smaller parties to unite.
 
 - @parties: Let's see what we can do.
 
 @parties
 
-WIP.
+The parties make their decisions...
 
 - @wp: What will the <span style="color: #B8996F;">**WP**</span> do?
-- @cnblp: What will the <span style="color: #7FCEB1;">**CNBLP**</span> do?
-- @csvd: What will the <span style="color: #8ED8E4;">**CSVD**</span> do?
-- @vrp: What will the <span style="color: #0075EB;">**VRP**</span> do?
 
 
 @wp
 view-if: wp_exist
 
-WIP
+The WP has greatly shifted to the right...
 
-- @wp_dnvp: The <span style="color: #B8996F;">**Economic Party**</span> unites with <span style="color: #3F7BC1;">**DNVP**</span>!
-- @wp_kvp: The <span style="color: #B8996F;">**Economic Party**</span> unites with <span style="color: #455B95;">**KVP**</span>!
+- @wp_dnvp: Surprisingly, the <span style="color: #B8996F;">**Economic Party**</span> unites with <span style="color: #003755;">**DNVP**</span>!
+- @wp_kvp: The <span style="color: #B8996F;">**Economic Party**</span> unites with <span style="color: #3F7BC1;">**KVP**</span>!
 
 @wp_dnvp
 unavailable-subtitle: The <span style="color: #B8996F;">**WP**</span> is not interested in uniting with far-right radicals.
+view-if: dnvp_formed
 choose-if: wp_ideology = "Radical"
 on-departure: {!
     Q.wp_exist = 0;
@@ -55,17 +53,17 @@ on-departure: {!
     }
 !}
 
-The <span style="color: #B8996F;">**WP**</span> has decided to unite with Hugenberg's <span style="color: #3F7BC1;">**DNVP**</span>.
+The <span style="color: #B8996F;">**WP**</span> has decided to unite with Hugenberg's <span style="color: #003755;">**DNVP**</span>.
 
 [? if not wp_split_seen and ddp_exist: Otto Colosser and his faction have split to join the <span style="color: #DCCA4A;">**[+ddp_name+]**</span>. ?]
 [? if not wp_split_seen and not ddp_exist: Otto Colosser and his faction have split to join us! ?]
 
-- @parties: What about other parties?
+- @cnblp: What will the <span style="color: #7FCEB1;">**CNBLP**</span> do?
   
 
 @wp_kvp
 unavailable-subtitle: The <span style="color: #B8996F;">**WP**</span> is not interested in uniting with moderate right.
-choose-if: wp_ideology = "Moderate"
+choose-if: wp_ideology = "Moderate" or not dnvp_formed
 on-departure: {!
     Q.wp_exist = 0;
     Q.parties = Q.parties.filter(party => party !== 'wp');
@@ -88,21 +86,22 @@ on-departure: {!
     }
 !}
 
-The <span style="color: #B8996F;">**WP**</span> has decided to unite with the <span style="color: #455B95;">**KVP**</span>.
+The <span style="color: #B8996F;">**WP**</span> has decided to unite with the <span style="color: #3F7BC1;">**KVP**</span>.
 
 [? if not wp_split_seen and ddp_exist: Otto Colosser and his faction have split to join the <span style="color: #DCCA4A;">**[+ddp_name+]**</span>. ?]
 [? if not wp_split_seen and not ddp_exist: Otto Colosser and his faction have split to join us! ?]
 
-- @parties: What about other parties?
+- @cnblp: What will the <span style="color: #7FCEB1;">**CNBLP**</span> do?
+  
 
 
 
 @cnblp
 view-if: cnblp_exist
 
-WIP
+The CNBLP will return to its parent party...
 
-- @cnblp_kvp: The <span style="color: #7FCEB1;">**CNBLP**</span> unites with <span style="color: #455B95;">**KVP**</span>!
+- @cnblp_kvp: The <span style="color: #7FCEB1;">**CNBLP**</span> reunites with <span style="color: #3F7BC1;">**KVP**</span>!
   
 
 @cnblp_kvp
@@ -118,18 +117,16 @@ on-departure: {!
     Q.rural_cnblp = 0;
 !}
 
-The <span style="color: #7FCEB1;">**CNBLP**</span> has decided to unite with the <span style="color: #455B95;">**KVP**</span>.
+The <span style="color: #7FCEB1;">**CNBLP**</span> has decided to reunites with the <span style="color: #3F7BC1;">**KVP**</span>.
 
-- @parties: What about other parties?
-
-
+- @csvd: What will the <span style="color: #8ED8E4;">**CSVD**</span> do?
 
 @csvd
 view-if: csvd_exist
 
 WIP
 
-- @csvd_kvp: The <span style="color: #8ED8E4;">**CSVD**</span> unites with <span style="color: #455B95;">**KVP**</span>!
+- @csvd_kvp: Thec<span style="color: #8ED8E4;">**CSVD**</span> unites with <span style="color: #455B95;">**KVP**</span>!
   
 
 @csvd_kvp
@@ -149,17 +146,18 @@ on-departure: {!
 
 The <span style="color: #8ED8E4;">**CSVD**</span> has decided to unite with the <span style="color: #455B95;">**KVP**</span>.
 
-- @parties: What about other parties?
+- @vrp: What about the <span style="color: #0075EB;">**VRP**</span>?
+
 
 
 
 @vrp
 view-if: vrp_exist
 
-WIP
+The VRP is the smallest of the parties that are uniting.
 
 - @vrp_ddp: The <span style="color: #0075EB;">**VRP**</span> unites with <span style="color: #DCCA4A;">**[+ddp_name+]**</span>!
-- @vrp_kvp: The <span style="color: #0075EB;">**VRP**</span> unites with <span style="color: #455B95;">**KVP**</span>!
+- @vrp_kvp: The <span style="color: #0075EB;">**VRP**</span> unites with <span style="color: #3F7BC1;">**kvp**</span>!
   
 
 @vrp_ddp
@@ -173,7 +171,7 @@ on-departure: {!
 
 The <span style="color: #0075EB;">**VRP**</span> has decided to unite with the <span style="color: #DCCA4A;">**[+ddp_name+]**</span>.
 
-- @parties: What about other parties?
+- @root: The consolidation of the right is finished. 
   
 
 @vrp_kvp
@@ -186,6 +184,6 @@ on-departure: {!
     Q.old_middle_other = 0;
 !}
 
-The <span style="color: #0075EB;">**VRP**</span> has decided to unite with the <span style="color: #455B95;">**KVP**</span>.
+The <span style="color: #0075EB;">**VRP**</span> has decided to unite with the <span style="color: #3F7BC1;">**KVP**</span>.
 
-- @parties: What about other parties?
+- @root: THe consolidation of the right is finished.
